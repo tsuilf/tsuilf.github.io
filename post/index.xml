@@ -5,12 +5,221 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 25 Sep 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Tufte样式</title>
+      <link>/post/2019-09-23-tufte/</link>
+      <pubDate>Wed, 25 Sep 2019 00:00:00 +0000</pubDate>
+      <guid>/post/2019-09-23-tufte/</guid>
+      <description>
+
+
+&lt;div id=&#34;section&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;引言&lt;/h1&gt;
+&lt;p&gt;Tufte样式在Edward Tufte的书以及物理学家费曼的教科书很常见，它的一个显著特点就是边栏的使用。例如脚注和边栏注解，以及放在边栏里的小型插图。Tufte样式在LaTeX和HTML/CSS中都有实现&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;。我们将这两种实现都纳入了&lt;a href=&#34;https://github.com/rstudio/tufte&#34;&gt;&lt;strong&gt;tufte&lt;/strong&gt;包&lt;/a&gt;。若需要LaTeX/PDF输出，使用输出格式&lt;code&gt;tufte_handout&lt;/code&gt;即可，类似地，&lt;code&gt;tufte_book&lt;/code&gt;可以用来输出PDF书，&lt;code&gt;tufte_html&lt;/code&gt;生成HTML网页。这些输出格式可以在YAML元数据中指定，或者传给&lt;code&gt;rmarkdown::render()&lt;/code&gt;函数。若对&lt;strong&gt;rmarkdown&lt;/strong&gt;包不熟悉，可参见 &lt;span class=&#34;citation&#34;&gt;Allaire et al. (&lt;a href=&#34;#ref-R-rmarkdown&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;。&lt;/p&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;---
+title: &amp;quot;一个Tufte样式示例&amp;quot;
+author: &amp;quot;张三&amp;quot;
+ctex: yes
+output:
+  tufte::tufte_handout:
+    latex_engine: xelatex
+  tufte::tufte_html: default
+---&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-1&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;章节标题&lt;/h1&gt;
+&lt;p&gt;Tufte样式不主张太深的章节目录，一般仅仅使用一级标题（Markdown中用一个井号&lt;code&gt;#&lt;/code&gt;）和二级标题（两个井号）。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-2&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;插图&lt;/h1&gt;
+&lt;div id=&#34;section-3&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;边栏插图&lt;/h2&gt;
+&lt;p&gt;插图在Tufte的书中非常常见，我们可以使用三种插图：边栏图、全宽图、主栏图。先说边栏图：使用&lt;strong&gt;knitr&lt;/strong&gt;代码段选项&lt;code&gt;fig.margin = TRUE&lt;/code&gt;即可将图形放置在边栏中，如：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(ggplot2)
+mtcars2 &amp;lt;- mtcars
+mtcars2$am &amp;lt;- factor(
+  mtcars$am, labels = c(&amp;#39;automatic&amp;#39;, &amp;#39;manual&amp;#39;)
+)
+ggplot(mtcars2, aes(hp, mpg, color = am)) +
+  geom_point() + geom_smooth() +
+  theme(legend.position = &amp;#39;bottom&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:fig-margin&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-09-23-tufte_files/figure-html/fig-margin-1.png&#34; alt=&#34;MPG&amp;lt;U+4E0E&amp;gt;horsepower&amp;lt;U+4E24&amp;gt;&amp;lt;U+4E2A&amp;gt;&amp;lt;U+53D8&amp;gt;&amp;lt;U+91CF&amp;gt;&amp;lt;U+7684&amp;gt;&amp;lt;U+6563&amp;gt;&amp;lt;U+70B9&amp;gt;&amp;lt;U+56FE&amp;gt;;&amp;lt;U+989C&amp;gt;&amp;lt;U+8272&amp;gt;&amp;lt;U+4EE3&amp;gt;&amp;lt;U+8868&amp;gt;&amp;lt;U+81EA&amp;gt;&amp;lt;U+52A8&amp;gt;&amp;lt;U+6321&amp;gt;&amp;lt;U+6216&amp;gt;&amp;lt;U+624B&amp;gt;&amp;lt;U+52A8&amp;gt;&amp;lt;U+6321&amp;gt;&amp;lt;U+3002&amp;gt;&#34; width=&#34;336&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: MPG&amp;lt;U+4E0E&amp;gt;horsepower&amp;lt;U+4E24&amp;gt;&amp;lt;U+4E2A&amp;gt;&amp;lt;U+53D8&amp;gt;&amp;lt;U+91CF&amp;gt;&amp;lt;U+7684&amp;gt;&amp;lt;U+6563&amp;gt;&amp;lt;U+70B9&amp;gt;&amp;lt;U+56FE&amp;gt;;&amp;lt;U+989C&amp;gt;&amp;lt;U+8272&amp;gt;&amp;lt;U+4EE3&amp;gt;&amp;lt;U+8868&amp;gt;&amp;lt;U+81EA&amp;gt;&amp;lt;U+52A8&amp;gt;&amp;lt;U+6321&amp;gt;&amp;lt;U+6216&amp;gt;&amp;lt;U+624B&amp;gt;&amp;lt;U+52A8&amp;gt;&amp;lt;U+6321&amp;gt;&amp;lt;U+3002&amp;gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;注意我们使用代码段选项&lt;code&gt;fig.cap&lt;/code&gt;设定了图的标题。当然我们也可以设置图的长宽。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-4&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;任意边栏内容&lt;/h2&gt;
+&lt;p&gt;事实上我们可以在边栏中放置除了图之外的内容，此时我们不再使用&lt;code&gt;```{r}&lt;/code&gt;写代码段，而是用&lt;code&gt;```{marginfigure}&lt;/code&gt;。例如右边有一个微积分第一基本定理。&lt;/p&gt;
+&lt;pre class=&#34;marginfigure&#34;&gt;&lt;code&gt;根据微积分第一基本定理我们知道，对$x \in [a, b]$有
+$$\frac{d}{dx}\left( \int_{a}^{x} f(u)\,du\right)=f(x).$$&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;为了文本内容的可移植性（同样的内容可以生成HTML和LaTeX文档），我们建议边栏中不要放置太复杂的内容，简单的加粗、倾斜都没有问题，但不建议在边栏中使用列表、参考文献等内容。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-5&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;全宽插图&lt;/h2&gt;
+&lt;p&gt;代码段选项&lt;code&gt;fig.fullwidth = TRUE&lt;/code&gt;可以使得一幅图占用全部页宽，例如：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(diamonds, aes(carat, price)) + geom_smooth() +
+  facet_grid(~ cut)&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:fig-fullwidth&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-09-23-tufte_files/figure-html/fig-fullwidth-1.png&#34; alt=&#34;&amp;lt;U+4E00&amp;gt;&amp;lt;U+5E45&amp;gt;&amp;lt;U+5168&amp;gt;&amp;lt;U+5BBD&amp;gt;&amp;lt;U+56FE&amp;gt;&amp;lt;U+5F62&amp;gt;&amp;lt;U+3002&amp;gt;&#34; width=&#34;960&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 2: &amp;lt;U+4E00&amp;gt;&amp;lt;U+5E45&amp;gt;&amp;lt;U+5168&amp;gt;&amp;lt;U+5BBD&amp;gt;&amp;lt;U+56FE&amp;gt;&amp;lt;U+5F62&amp;gt;&amp;lt;U+3002&amp;gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;其它和图形有关的代码段选项仍然可以使用，一般情况下，全宽图形的&lt;code&gt;fig.width&lt;/code&gt;选项会较大，而&lt;code&gt;fig.height&lt;/code&gt;相对较小。上图的尺寸是&lt;span class=&#34;math inline&#34;&gt;\(10 \times 2\)&lt;/span&gt;英寸.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-6&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;主栏插图&lt;/h2&gt;
+&lt;p&gt;默认情况下，R代码段生成的图形放置在主栏里，其标题放在边栏中，例如：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(diamonds, aes(cut, price)) + geom_boxplot()&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:fig-main&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2019-09-23-tufte_files/figure-html/fig-main-1.png&#34; alt=&#34;&amp;lt;U+4E00&amp;gt;&amp;lt;U+5E45&amp;gt;&amp;lt;U+4E3B&amp;gt;&amp;lt;U+680F&amp;gt;&amp;lt;U+63D2&amp;gt;&amp;lt;U+56FE&amp;gt;&amp;lt;U+3002&amp;gt;&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 3: &amp;lt;U+4E00&amp;gt;&amp;lt;U+5E45&amp;gt;&amp;lt;U+4E3B&amp;gt;&amp;lt;U+680F&amp;gt;&amp;lt;U+63D2&amp;gt;&amp;lt;U+56FE&amp;gt;&amp;lt;U+3002&amp;gt;
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-7&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;边栏附注&lt;/h1&gt;
+&lt;p&gt;Tufte样式的文档中，脚注会被自动转换为边栏附注&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;。脚注是带编号的，另一种边栏附注是不带编号的，这种附注需要用&lt;strong&gt;tufte&lt;/strong&gt;包中的R函数&lt;code&gt;margin_note()&lt;/code&gt;在&lt;strong&gt;knitr&lt;/strong&gt;行内代码中生成。&lt;label for=&#34;tufte-mn-&#34; class=&#34;margin-toggle&#34;&gt;⊕&lt;/label&gt;&lt;input type=&#34;checkbox&#34; id=&#34;tufte-mn-&#34; class=&#34;margin-toggle&#34;&gt;&lt;span class=&#34;marginnote&#34;&gt;&amp;lt;U+8FD9&amp;gt;&amp;lt;U+662F&amp;gt;&amp;lt;U+4E00&amp;gt;&amp;lt;U+4E2A&amp;gt;&amp;lt;U+8FB9&amp;gt;&amp;lt;U+680F&amp;gt;&amp;lt;U+9644&amp;gt;&amp;lt;U+6CE8&amp;gt;,&amp;lt;U+5B83&amp;gt;&amp;lt;U+6CA1&amp;gt;&amp;lt;U+6709&amp;gt;&amp;lt;U+7F16&amp;gt;&amp;lt;U+53F7&amp;gt;&amp;lt;U+3002&amp;gt;&lt;/span&gt;与边栏插图一样，边栏附注中我们也不建议写太复杂的内容，通常只是一句简单的文字。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-8&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;参考文献&lt;/h1&gt;
+&lt;p&gt;HTML输出中，参考文献默认也放在边栏中。例如这里我们可以引用&lt;span class=&#34;citation&#34;&gt;(R Core Team &lt;a href=&#34;#ref-R-base&#34;&gt;2019&lt;/a&gt;)&lt;/span&gt;。这个功能需要在YAML元数据中设置&lt;code&gt;link-citations: yes&lt;/code&gt;，而且&lt;code&gt;pandoc-citeproc&lt;/code&gt;程序的版本应该至少是0.7.2。若这两个条件不满足，参考文献会被放在文档末尾。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-9&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;表格&lt;/h1&gt;
+&lt;p&gt;我们可以用&lt;strong&gt;knitr&lt;/strong&gt;包中的&lt;code&gt;kable()&lt;/code&gt;函数生成简单的表格。HTML输出中表格的标题也会被放在边栏中。&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::kable(
+  mtcars[1:6, 1:6], caption = &amp;#39;mtcars数据的前几行。&amp;#39;
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;caption&gt;&lt;span id=&#34;tab:unnamed-chunk-2&#34;&gt;Table 1: &lt;/span&gt;mtcars&amp;lt;U+6570&amp;gt;&amp;lt;U+636E&amp;gt;&amp;lt;U+7684&amp;gt;&amp;lt;U+524D&amp;gt;&amp;lt;U+51E0&amp;gt;&amp;lt;U+884C&amp;gt;&amp;lt;U+3002&amp;gt;&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;mpg&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;cyl&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;disp&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;hp&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;drat&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;wt&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Mazda RX4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;160&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;110&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.620&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Mazda RX4 Wag&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21.0&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;160&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;110&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.90&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.875&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Datsun 710&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;22.8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;108&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;93&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.85&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.320&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Hornet 4 Drive&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;21.4&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;258&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;110&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.08&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.215&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td&gt;Hornet Sportabout&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;18.7&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;8&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;360&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;175&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.15&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.440&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td&gt;Valiant&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;18.1&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;225&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;105&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;2.76&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;3.460&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-10&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;引文&lt;/h1&gt;
+&lt;p&gt;Markdown语法使用&lt;code&gt;&amp;gt;&lt;/code&gt;来生成引文，如果需要在引文下面用行内代码以及&lt;code&gt;quote_footer()&lt;/code&gt;函数加上一句引文来源，例如：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“多亏了我的律师，要不然我现在还在牢里。两个人一起挖确实比一个人快很多啊。”&lt;/p&gt;
+&lt;footer&gt;
+— Joe Martin
+&lt;/footer&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;如果不用这个函数的话，引文底部的话只是一个普通段落：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“伟人论道，凡人论事，小人论酒。”&lt;/p&gt;
+&lt;p&gt;— Fran Lebowitz&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-11&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;响应式页面&lt;/h1&gt;
+&lt;p&gt;这个包生成的HTML页面是响应式的：如果页宽小于760像素，边栏内容会自动隐藏。此时我们可以点击脚注的序号显示它，其它边栏附注则可以通过点击圆圈加号的符号显示。&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;section-12&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;结语&lt;/h1&gt;
+&lt;p&gt;希望诸位喜欢R Markdown的超级简洁性，同时我们感谢Tufte-CSS和Tufte-LaTeX项目的作者们，没有他们的辛勤劳动，就没有这个&lt;strong&gt;tufte&lt;/strong&gt;包。这份文档的R Markdown源文档可以在&lt;a href=&#34;https://github.com/rstudio/tufte/raw/master/inst/rmarkdown/templates/tufte_ctex/skeleton/skeleton.Rmd&#34;&gt;Github上找到&lt;/a&gt;，或者直接使用RStudio菜单&lt;code&gt;File -&amp;gt; New File -&amp;gt; R Markdown -&amp;gt; From Template&lt;/code&gt;新建一个文档，或直接从R里面打开这个Rmd文件：&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;file.edit(
+  tufte:::template_resources(
+    &amp;#39;tufte_ctex&amp;#39;, &amp;#39;..&amp;#39;, &amp;#39;skeleton&amp;#39;, &amp;#39;skeleton.Rmd&amp;#39;
+  )
+)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;refs&#34; class=&#34;references&#34;&gt;
+&lt;div id=&#34;ref-R-rmarkdown&#34;&gt;
+&lt;p&gt;Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2019. &lt;em&gt;Rmarkdown: Dynamic Documents for R&lt;/em&gt;. &lt;a href=&#34;https://CRAN.R-project.org/package=rmarkdown&#34;&gt;https://CRAN.R-project.org/package=rmarkdown&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ref-R-base&#34;&gt;
+&lt;p&gt;R Core Team. 2019. &lt;em&gt;R: A Language and Environment for Statistical Computing&lt;/em&gt;. Vienna, Austria: R Foundation for Statistical Computing. &lt;a href=&#34;https://www.R-project.org/&#34;&gt;https://www.R-project.org/&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;参见Github库&lt;a href=&#34;https://github.com/tufte-latex/tufte-latex&#34;&gt;tufte-latex&lt;/a&gt;和 &lt;a href=&#34;https://github.com/edwardtufte/tufte-css&#34;&gt;tufte-css&lt;/a&gt;&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;这里本来是一个脚注&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Writing technical content in Academic</title>
